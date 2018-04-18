@@ -38,9 +38,23 @@ final String batch = "&useServerPrepStmts=false&rewriteBatchedStatements=true&us
 ```
 
 ### 参数生效的依赖
-useCursorFetch=true依赖useServerPrepStmts=true
-useServerPrepStmts=true依赖cachePrepStmts=true
+
+useCursorFetch=true依赖useServerPrepStmts=true，实际上只要设置了useCursorFetch=true，useServerPrepStmts不管设置true/false，都会被默认为是true。
+
+useServerPrepStmts=true依赖cachePrepStmts=true。
 
 
 若关闭cachePrepStmts，会导致useCursorFetch不生效，查询大数据是可能oom。
 启用cachePrepStmts后，preparedSatement只有在其connection真正关闭才会释放，若用连接池则在连接池close之前一直存在。
+
+
+### 修复bug
+useServerPrepStmts启用的情况下：
+
+getString读取text、longtext，getTimestamp读取timestamp字段时，如果为值，则抛ArrayIndexOutOfBoundsException，
+使用getObject则可避免，因为getObject有getNull检测。
+
+BLOB、JSON类型也应该有类似问题，@see MysqlaUtils.getBinaryEncodedLength返回0的case。
+
+在此已修复避免抛异常，修改：com.mysql.cj.mysqla.io.Buffer#readInteger。
+
