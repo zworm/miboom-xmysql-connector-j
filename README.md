@@ -51,10 +51,10 @@ useServerPrepStmts=true依赖cachePrepStmts=true。
 ### 修复bug
 useServerPrepStmts启用的情况下：
 
-getString读取text、longtext，getTimestamp读取timestamp字段时，如果为值，则抛ArrayIndexOutOfBoundsException，
+getString读取null值的text、longtext字段，getTimestamp读取null值字段(可以不是timestamp类型)时，则抛ArrayIndexOutOfBoundsException，
 使用getObject则可避免，因为getObject有getNull检测。
 
-BLOB、JSON类型也应该有类似问题，@see MysqlaUtils.getBinaryEncodedLength返回0的case。
+BLOB、JSON类型也应有类似问题，@see MysqlaUtils.getBinaryEncodedLength返回0的case。
 
 在此已修复避免抛异常，修改：com.mysql.cj.mysqla.io.Buffer#readInteger。
 
