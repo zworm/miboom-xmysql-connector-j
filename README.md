@@ -3,6 +3,7 @@
 	在某些情况下查询出错，本工程修复该问题。
 	
 下载已修复的驱动：[dist/fixed/mysql-connector-java-6.0.6.jar](dist/fixed/mysql-connector-java-6.0.6.jar)
+
 [https://forums.mysql.com/read.php?39,665663](https://forums.mysql.com/read.php?39,665663)
 
 ## 出错情况
