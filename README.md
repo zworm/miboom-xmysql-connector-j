@@ -3,7 +3,7 @@
 	在某些情况下查询出错，本工程修复该问题。
 	
 下载已修复的驱动：[dist/fixed/mysql-connector-java-6.0.6.jar](dist/fixed/mysql-connector-java-6.0.6.jar)
-
+[https://forums.mysql.com/read.php?39,665663](https://forums.mysql.com/read.php?39,665663)
 
 ## 出错情况
 
@@ -58,3 +58,4 @@ BLOB、JSON类型也应有类似问题，@see MysqlaUtils.getBinaryEncodedLength
 
 在此已修复避免抛异常，修改：com.mysql.cj.mysqla.io.Buffer#readInteger。
 
+[https://forums.mysql.com/read.php?39,665662](https://forums.mysql.com/read.php?39,665662)
