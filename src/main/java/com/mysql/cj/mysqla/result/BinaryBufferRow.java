@@ -230,7 +230,7 @@ public class BinaryBufferRow extends AbstractBufferRow {
         
         // zzf: fix ArrayIndexOutOfBoundsException error
 //        if (length == 0) {
-        if (!getNull(columnIndex)) {
+        if (length == 0&&!getNull(columnIndex)) {
             length = (int) this.rowFromServer.readInteger(IntegerDataType.INT_LENENC);
         } else if (length == -1) {
             throw ExceptionFactory.createException(Messages.getString("MysqlIO.97", new Object[] { type, columnIndex + 1, this.metadata.getFields().length }),
